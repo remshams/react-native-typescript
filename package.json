@@ -5,7 +5,11 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "build": "tsc"
+    "clean": "rimraf ./lib",
+    "build": "npm run clean && tsc && npm run copy:i18n && npm run copy:assets",
+    "watch": "watchman ./src 'tsc'",
+    "copy:i18n": "cpx './src/_shared/i18n/**/*.json' ./lib/_shared/i18n/",
+    "copy:assets": "cpx './src/assets/**/*' ./lib/assets/"
   },
   "dependencies": {
     "react": "16.0.0-beta.5",
@@ -18,10 +22,13 @@
     "@types/react-test-renderer": "^15.5.4",
     "babel-jest": "21.2.0",
     "babel-preset-react-native": "4.0.0",
+    "cpx": "^1.5.0",
     "jest": "21.2.1",
     "react-test-renderer": "16.0.0-beta.5",
+    "rimraf": "^2.6.2",
     "ts-jest": "^21.1.0",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "watchman": "^0.1.8"
   },
   "jest": {
     "preset": "react-native",
