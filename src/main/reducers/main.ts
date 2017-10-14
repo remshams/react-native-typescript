@@ -1,9 +1,14 @@
+import { NavigationState } from "react-navigation";
+import { MainNavigator } from "../components/main";
+
 export type MainState = {
-  value: string;
+  nav: NavigationState
 }
 
+const projectsViewAction = MainNavigator.router.getActionForPathAndParams("Projects");
+
 export const initState: MainState = {
-  value: "test"
+  nav: MainNavigator.router.getStateForAction(projectsViewAction, undefined)
 };
 
 export const mainReducer = (state: MainState = initState) => {

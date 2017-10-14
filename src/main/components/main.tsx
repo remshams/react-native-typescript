@@ -1,18 +1,29 @@
 import * as React from "react";
-import MainView from "../views/main";
+import {
+  addNavigationHelpers, NavigationAction, NavigationDispatch, NavigationState,
+  TabNavigator
+} from "react-navigation";
+import Projects from "../../projects/containers/projects";
+import { connect, Dispatch, DispatchProp } from "react-redux";
 import { MainState } from "../reducers/main";
-import { connect } from "react-redux";
 
 export type MainProps = {
-  message: string;
+  dispatch: NavigationDispatch<NavigationAction>;
+  nav: NavigationState;
 }
 
-const Main = ({ message }: MainProps) => (
-  <MainView message={message}/>
+export const MainNavigator = TabNavigator({
+  Projects: {
+    screen: Projects
+  }
+});
+
+const Main = ({ dispatch, nav }: MainProps & DispatchProp<NavigationDispatch<NavigationAction>>) => (
+  <MainNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
 );
 
 const mapStateToProps = (state: MainState) => ({
-  message: state.value
+  nav: state.nav
 });
 
 export default connect(mapStateToProps)(Main);
