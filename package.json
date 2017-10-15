@@ -6,14 +6,15 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "clean": "rimraf ./lib",
-    "build": "npm run clean && tsc && npm run copy:i18n && npm run copy:assets",
+    "build": "npm run clean && tsc -p 'tsconfig_build.json' && npm run copy:i18n && npm run copy:assets",
     "watch": "watchman ./src 'tsc'",
-    "copy:i18n": "cpx './src/_shared/i18n/**/*.json' ./lib/_shared/i18n/",
+    "copy:i18n": "cpx './src/__shared__/i18n/**/*.json' ./lib/__shared__/i18n/",
     "copy:assets": "cpx './src/assets/**/*' ./lib/assets/"
   },
   "dependencies": {
     "react": "16.0.0-beta.5",
     "react-native": "0.49.2",
+    "react-native-localization": "^0.1.32",
     "react-navigation": "^1.0.0-beta.13",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
